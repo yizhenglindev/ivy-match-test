@@ -110,3 +110,19 @@ Recommended: **Vercel**
 3. Click Deploy
 
 No backend is required for this project.
+
+### GitHub Pages (auto deploy)
+
+This repo includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml`.
+
+After pushing to `main`, enable Pages in GitHub:
+
+1. Go to `Settings` -> `Pages`
+2. Under **Build and deployment**, set **Source** to `GitHub Actions`
+3. Push to `main` again (or run the workflow manually)
+
+Your site URL will be:
+
+```text
+https://<your-github-username>.github.io/<repo-name>/
+```

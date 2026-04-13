@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { QuestionCard } from "@/components/question-card";
 import { questionSets, resolveQuizMode } from "@/data/questions";
 import { pickText, resolveLang } from "@/lib/i18n";
 
-export default function TestPage() {
+function TestPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const lang = resolveLang(searchParams.get("lang") ?? undefined);
@@ -111,5 +111,13 @@ export default function TestPage() {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function TestPage() {
+  return (
+    <Suspense fallback={<div className="h-10" />}>
+      <TestPageContent />
+    </Suspense>
   );
 }

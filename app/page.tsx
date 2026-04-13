@@ -1,16 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { pickText, resolveLang } from "@/lib/i18n";
 import { resolveQuizMode } from "@/data/questions";
 
-type HomePageProps = {
-  searchParams: Promise<{ lang?: string; mode?: string }>;
-};
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const params = await searchParams;
-  const lang = resolveLang(params.lang);
-  const mode = resolveQuizMode(params.mode);
+function HomePageContent() {
+  const searchParams = useSearchParams();
+  const lang = resolveLang(searchParams.get("lang") ?? undefined);
+  const mode = resolveQuizMode(searchParams.get("mode") ?? undefined);
 
   return (
     <div className="space-y-8">
@@ -106,5 +106,13 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div className="h-10" />}>
+      <HomePageContent />
+    </Suspense>
   );
 }

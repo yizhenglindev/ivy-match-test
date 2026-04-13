@@ -1,20 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { calculateIvyMatchResult, ivySchoolMeta } from "@/lib/ivy-match";
 import { questionSets, resolveQuizMode } from "@/data/questions";
 import { ResultDashboard } from "@/components/result-dashboard";
 import { pickText, resolveLang } from "@/lib/i18n";
 
-type ResultPageProps = {
-  searchParams: Promise<{ answers?: string; lang?: string; mode?: string }>;
-};
-
-export default async function ResultPage({ searchParams }: ResultPageProps) {
-  const params = await searchParams;
-  const lang = resolveLang(params.lang);
-  const mode = resolveQuizMode(params.mode);
+function ResultPageContent() {
+  const searchParams = useSearchParams();
+  const lang = resolveLang(searchParams.get("lang") ?? undefined);
+  const mode = resolveQuizMode(searchParams.get("mode") ?? undefined);
   const questions = questionSets[mode];
-  const answers = decodeURIComponent(params.answers ?? "")
+  const answers = decodeURIComponent(searchParams.get("answers") ?? "")
     .split(",")
     .filter(Boolean);
   const result = calculateIvyMatchResult(questions, answers);
@@ -60,5 +60,13 @@ export default async function ResultPage({ searchParams }: ResultPageProps) {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense fallback={<div className="h-10" />}>
+      <ResultPageContent />
+    </Suspense>
   );
 }
