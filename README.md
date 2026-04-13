@@ -1,5 +1,7 @@
 # Ivy Match Test
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 A playful **Ivy League matching quiz** built with Next.js, TypeScript, and Tailwind CSS.
 
 Users answer 10 questions, then get:
