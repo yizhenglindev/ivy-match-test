@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.14), transparent 25%),
+    radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.1), transparent 30%),
+    #f8fafc;
+  color: #0f172a;
+}
+
+::selection {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+
+.app-shell {
+  position: relative;
+}
+
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.07), rgba(16, 185, 129, 0.05));
+  z-index: -1;
+}
+
+.hero-card {
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(238, 242, 255, 0.92));
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.25);
+}
+
+.primary-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.secondary-btn {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+}
+
+.secondary-btn:hover {
+  background: #f8fafc;
+}
+
+.animated-progress {
+  background: linear-gradient(90deg, #4f46e5, #06b6d4);
+  transition: width 0.35s ease;
+}
+
+.score-bar {
+  background: linear-gradient(90deg, #22c55e, #0ea5e9);
+  transition: width 0.6s ease;
+}
